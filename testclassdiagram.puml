@@ -1,0 +1,2027 @@
+@startuml
+
+set namespaceSeparator ::
+
+
+
+class "organise_me::components::auth_service.dart::AuthService" {
+
+  -FirebaseAuth _auth
+
+  -FirebaseFirestore _firestore
+
+  +dynamic registerWithEmailAndPassword()
+
+  +dynamic signInWithEmailAndPassword()
+
+  +dynamic signOut()
+
+  +dynamic getUsername()
+
+  +dynamic updateUsername()
+
+  +dynamic getEmail()
+
+  +dynamic getPassword()
+
+}
+
+
+
+"organise_me::components::auth_service.dart::AuthService" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::auth_service.dart::AuthService" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+
+
+class "organise_me::components::event.dart::Event" {
+
+  +String eventName
+
+  +String eventDescription
+
+  +String startDate
+
+  +String endDate
+
+  +String startTime
+
+  +String endTime
+
+}
+
+
+
+class "organise_me::components::event_manager.dart::EventManager" {
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> events
+
+  +String eventName
+
+  +String eventDescription
+
+  +String startDate
+
+  +String endDate
+
+  +String startTime
+
+  +String endTime
+
+  -String _userId
+
+  -CollectionReference<Object?> _event
+
+  +dynamic addEvent()
+
+  +dynamic fetchEventDetails()
+
+  +dynamic updateEventDetails()
+
+  +dynamic deleteEvent()
+
+}
+
+
+
+"organise_me::components::event_manager.dart::EventManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::event_manager.dart::EventManager" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::event_manager.dart::EventManager" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::list_manager.dart::ListManager" {
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> lists
+
+  +List<String> listIDs
+
+  -String _userId
+
+  -CollectionReference<Object?> _list
+
+  +dynamic fetchLists()
+
+  +dynamic addList()
+
+  +dynamic updateList()
+
+  +dynamic deleteList()
+
+  -dynamic _deleteDocumentAndSubcollections()
+
+}
+
+
+
+"organise_me::components::list_manager.dart::ListManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::list_manager.dart::ListManager" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::list_manager.dart::ListManager" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::main_category.dart::MainCategory" {
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> defaultMainCategories
+
+  +List<String> mainCategories
+
+  +List<String> defaultExpenseCategories
+
+  +List<String> expensesCategory
+
+  +List<String> defaultIncomeCategories
+
+  +List<String> incomeCategory
+
+  +List<String> defaultDebtCategories
+
+  +List<String> debtCategory
+
+  +List<String> defaultSavingsCategories
+
+  +List<String> savingsCategory
+
+  +List<String> defaultInvestmentCategories
+
+  +List<String> investmentCategory
+
+  -String _userId
+
+  -CollectionReference<Object?> _expenses
+
+  -CollectionReference<Object?> _income
+
+  -CollectionReference<Object?> _debt
+
+  -CollectionReference<Object?> _savings
+
+  -CollectionReference<Object?> _investment
+
+  +dynamic fetchCategories()
+
+  +dynamic addExpensesCategory()
+
+  +dynamic addIncomeCategory()
+
+  +dynamic addDebtCategory()
+
+  +dynamic addSavingsCategory()
+
+  +dynamic addInvestmentCategory()
+
+  +dynamic updateExpensesCategory()
+
+  +dynamic updateIncomeCategory()
+
+  +dynamic updateDebtCategory()
+
+  +dynamic updateSavingsCategory()
+
+  +dynamic updateInvestmentCategory()
+
+  +dynamic deleteExpensesCategory()
+
+  +dynamic deleteIncomeCategory()
+
+  +dynamic deleteDebtCategory()
+
+  +dynamic deleteSavingsCategory()
+
+  +dynamic deleteInvestmentCategory()
+
+}
+
+
+
+"organise_me::components::main_category.dart::MainCategory" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::main_category.dart::MainCategory" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::main_category.dart::MainCategory" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::profile_picture.dart::ProfilePicture" {
+
+  +File? image
+
+  +ImagePicker picker
+
+  -FirebaseAuth _auth
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseStorage _storage
+
+  +String? profilePictureUrl
+
+  +void Function()? onUpdate
+
+  -String _userId
+
+  -CollectionReference<Object?> _profilePicture
+
+  +void setUpdateCallback()
+
+  +dynamic getPictureFromGallery()
+
+  +dynamic getPictureFromCamera()
+
+  +dynamic showOptions()
+
+  +dynamic uploadImage()
+
+  +dynamic loadProfilePicture()
+
+}
+
+
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "dart::io::File"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "image_picker::image_picker.dart::ImagePicker"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "firebase_storage::firebase_storage.dart::FirebaseStorage"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "dart::ui::void Function()"
+
+"organise_me::components::profile_picture.dart::ProfilePicture" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::reusable_button.dart::ReusableButton" {
+
+  +String text
+
+  +void Function() onPress
+
+  +Color backgroundColor
+
+  +Color textColor
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::components::reusable_button.dart::ReusableButton" o-- "null::void Function()"
+
+"organise_me::components::reusable_button.dart::ReusableButton" o-- "dart::ui::Color"
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "organise_me::components::reusable_button.dart::ReusableButton"
+
+
+
+class "organise_me::components::reusable_text.dart::ReusableText" {
+
+  +String text
+
+  +double fontSize
+
+  +Color color
+
+  +TextDecoration decoration
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::components::reusable_text.dart::ReusableText" o-- "dart::ui::Color"
+
+"organise_me::components::reusable_text.dart::ReusableText" o-- "dart::ui::TextDecoration"
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "organise_me::components::reusable_text.dart::ReusableText"
+
+
+
+class "organise_me::components::statistics_manager.dart::StatisticsManager" {
+
+  +Map<String, double> expenses
+
+  +Map<String, double> income
+
+  +Map<String, double> debt
+
+  +Map<String, double> savings
+
+  +Map<String, double> investment
+
+  +Map<String, List<double>> monthlyTotals
+
+  +double totalExpenses
+
+  +double totalIncome
+
+  +double totalDebt
+
+  +double totalSavings
+
+  +double totalInvestment
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> transactions
+
+  -String _userId
+
+  -CollectionReference<Object?> _transactions
+
+  -CollectionReference<Object?> _expenses
+
+  -CollectionReference<Object?> _income
+
+  -CollectionReference<Object?> _debt
+
+  -CollectionReference<Object?> _savings
+
+  -CollectionReference<Object?> _investment
+
+  -void _initializeTransaction()
+
+  +dynamic calcTotal()
+
+  +dynamic calcMonthlyTotals()
+
+  +dynamic calcDailyTotals()
+
+}
+
+
+
+"organise_me::components::statistics_manager.dart::StatisticsManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::statistics_manager.dart::StatisticsManager" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::statistics_manager.dart::StatisticsManager" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::task.dart::Tasks" {
+
+  +String taskName
+
+  +String taskDescription
+
+  +String priority
+
+  +String startDate
+
+  +String endDate
+
+  +String startTime
+
+  +String endTime
+
+  +bool isReminderOn
+
+  +String listName
+
+}
+
+
+
+class "organise_me::components::task.dart::TaskName" {
+
+  +String taskName
+
+  +String priority
+
+}
+
+
+
+class "organise_me::components::task_manager.dart::TaskManager" {
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> tasks
+
+  +List<String> taskHistory
+
+  +String taskName
+
+  +String taskDescription
+
+  +String priority
+
+  +String startDate
+
+  +String endDate
+
+  +String startTime
+
+  +String endTime
+
+  +String listName
+
+  -String _userId
+
+  -CollectionReference<Object?> _list
+
+  +dynamic fetchTaskName()
+
+  +dynamic addTask()
+
+  +dynamic addTaskHistory()
+
+  +dynamic updateTaskName()
+
+  +dynamic updateTaskDetails()
+
+  +dynamic deleteTask()
+
+  +dynamic deleteTaskHistory()
+
+  +dynamic fetchTaskDetails()
+
+  +dynamic fetchHistoryDetails()
+
+  +dynamic fetchTaskHistory()
+
+}
+
+
+
+"organise_me::components::task_manager.dart::TaskManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::task_manager.dart::TaskManager" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::task_manager.dart::TaskManager" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::transaction.dart::Transactions" {
+
+  +String group
+
+  +String category
+
+  +String name
+
+  +String amount
+
+  +String date
+
+  +String to
+
+  +String description
+
+}
+
+
+
+class "organise_me::components::transaction_manager.dart::TransactionManager" {
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  +List<String> transactions
+
+  +String group
+
+  +String category
+
+  +String name
+
+  +String amount
+
+  +String date
+
+  +String to
+
+  +String description
+
+  -String _userId
+
+  -CollectionReference<Object?> _transactions
+
+  +dynamic addTransaction()
+
+  +dynamic fetchTransactionDetails()
+
+  +dynamic updateTransactionDetails()
+
+  +dynamic deleteTransaction()
+
+}
+
+
+
+"organise_me::components::transaction_manager.dart::TransactionManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::components::transaction_manager.dart::TransactionManager" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::components::transaction_manager.dart::TransactionManager" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+
+
+class "organise_me::components::utils.dart::SizeConfig" {
+
+  {static} +double scaleWidth
+
+  {static} +double scaleHeight
+
+  {static} +double scale
+
+  {static} +void init()
+
+  {static} +double widthSize()
+
+  {static} +double heightSize()
+
+  {static} +double scaleSize()
+
+}
+
+
+
+class "organise_me::screen::add_task_screen.dart::AddTaskScreen" {
+
+  {static} +String id
+
+  +String listName
+
+  +State<AddTaskScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::add_task_screen.dart::AddTaskScreen"
+
+
+
+class "organise_me::screen::add_task_screen.dart::_AddTaskScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  -TaskManager _taskManager
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  +List<String> priorities
+
+  +String? selectedPriority
+
+  -TextEditingController _taskNameController
+
+  -TextEditingController _taskDescriptionController
+
+  -TextEditingController _startDateController
+
+  -TextEditingController _endDateController
+
+  -TextEditingController _startTimeController
+
+  -TextEditingController _endTimeController
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -String _formatTimeOfDay()
+
+  +void dispose()
+
+  -dynamic _fetchTasks()
+
+  +Widget build()
+
+  -dynamic _displayListNameDialog()
+
+  -dynamic _selectStartDate()
+
+  -dynamic _selectEndDate()
+
+  -dynamic _selectStartTime()
+
+  -dynamic _selectEndTime()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::add_task_screen.dart::_AddTaskScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::add_task_screen.dart::_AddTaskScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::add_task_screen.dart::_AddTaskScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"organise_me::screen::add_task_screen.dart::_AddTaskScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::add_task_screen.dart::_AddTaskScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::add_task_screen.dart::_AddTaskScreenState"
+
+
+
+class "organise_me::screen::edit_event_screen.dart::EditEventScreen" {
+
+  {static} +String id
+
+  +String eventName
+
+  +State<EditEventScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::edit_event_screen.dart::EditEventScreen"
+
+
+
+class "organise_me::screen::edit_event_screen.dart::_EditEventScreenState" {
+
+  -TextEditingController _eventController
+
+  -TextEditingController _descriptionController
+
+  -TextEditingController _startDateController
+
+  -TextEditingController _endDateController
+
+  -TextEditingController _startTimeController
+
+  -TextEditingController _endTimeController
+
+  -EventManager _eventManager
+
+  -dynamic _eventDetails
+
+  +List<String> regular
+
+  +String? selectedRegular
+
+  +List<String> days
+
+  +String? selectedDays
+
+  -dynamic _fetchEventDetails()
+
+  +void initState()
+
+  -String _formatTimeOfDay()
+
+  +void dispose()
+
+  +Widget build()
+
+  -dynamic _selectStartDate()
+
+  -dynamic _selectEndDate()
+
+  -dynamic _selectStartTime()
+
+  -dynamic _selectEndTime()
+
+}
+
+
+
+"organise_me::screen::edit_event_screen.dart::_EditEventScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::edit_event_screen.dart::_EditEventScreenState" o-- "organise_me::components::event_manager.dart::EventManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::edit_event_screen.dart::_EditEventScreenState"
+
+
+
+class "organise_me::screen::edit_task_screen.dart::EditTaskScreen" {
+
+  {static} +String id
+
+  +String taskName
+
+  +String listName
+
+  +bool isFromHomeScreen
+
+  +State<EditTaskScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::edit_task_screen.dart::EditTaskScreen"
+
+
+
+class "organise_me::screen::edit_task_screen.dart::_EditTaskScreenState" {
+
+  +List<String> tasks
+
+  +List<String> priorities
+
+  +String? selectedPriority
+
+  -TextEditingController _taskNameController
+
+  -TextEditingController _taskDescriptionController
+
+  -TextEditingController _startDateController
+
+  -TextEditingController _endDateController
+
+  -TextEditingController _startTimeController
+
+  -TextEditingController _endTimeController
+
+  -TaskManager _taskManager
+
+  -dynamic _taskDetails
+
+  -dynamic _fetchTaskDetails()
+
+  +void initState()
+
+  -String _formatTimeOfDay()
+
+  +void dispose()
+
+  +Widget build()
+
+  -dynamic _selectStartDate()
+
+  -dynamic _selectEndDate()
+
+  -dynamic _selectStartTime()
+
+  -dynamic _selectEndTime()
+
+}
+
+
+
+"organise_me::screen::edit_task_screen.dart::_EditTaskScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::edit_task_screen.dart::_EditTaskScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::edit_task_screen.dart::_EditTaskScreenState"
+
+
+
+class "organise_me::screen::edit_transaction_screen.dart::EditTransactionScreen" {
+
+  {static} +String id
+
+  +String name
+
+  +State<EditTransactionScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::edit_transaction_screen.dart::EditTransactionScreen"
+
+
+
+class "organise_me::screen::edit_transaction_screen.dart::_EditTransactionScreenState" {
+
+  -TextEditingController _nameController
+
+  -TextEditingController _amountController
+
+  -TextEditingController _dateController
+
+  -TextEditingController _toController
+
+  -TextEditingController _descriptionController
+
+  -TransactionManager _transactionManager
+
+  -dynamic _transactionDetails
+
+  -MainCategory _mainCategory
+
+  +String? selectedCategory
+
+  +String? selectedSubcategory
+
+  +List<String> group
+
+  +String? selectedGroup
+
+  +List<String> selectedList
+
+  +List<String> determineCategory()
+
+  -dynamic _fetchTransactionDetails()
+
+  +void initState()
+
+  -dynamic _fetchCategories()
+
+  +void dispose()
+
+  -void _showAddMainCategoryDialog()
+
+  +Widget build()
+
+  -dynamic _selectDate()
+
+}
+
+
+
+"organise_me::screen::edit_transaction_screen.dart::_EditTransactionScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::edit_transaction_screen.dart::_EditTransactionScreenState" o-- "organise_me::components::transaction_manager.dart::TransactionManager"
+
+"organise_me::screen::edit_transaction_screen.dart::_EditTransactionScreenState" o-- "organise_me::components::main_category.dart::MainCategory"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::edit_transaction_screen.dart::_EditTransactionScreenState"
+
+
+
+class "organise_me::screen::event_screen.dart::EventScreen" {
+
+  {static} +String id
+
+  +State<EventScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::event_screen.dart::EventScreen"
+
+
+
+class "organise_me::screen::event_screen.dart::_EventScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  -DateTime _focusedDay
+
+  -DateTime? _selectedDay
+
+  -TextEditingController _eventNameController
+
+  -TextEditingController _eventDescriptionController
+
+  -TextEditingController _startDateController
+
+  -TextEditingController _endDateController
+
+  -TextEditingController _startTimeController
+
+  -TextEditingController _endTimeController
+
+  -EventManager _eventManager
+
+  +List<String> regular
+
+  +String? selectedRegular
+
+  +List<String> days
+
+  +String? selectedDays
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -String _formatTimeOfDay()
+
+  +void dispose()
+
+  +Widget build()
+
+  -dynamic _selectStartDate()
+
+  -dynamic _selectEndDate()
+
+  -dynamic _selectStartTime()
+
+  -dynamic _selectEndTime()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::event_screen.dart::_EventScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::event_screen.dart::_EventScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::event_screen.dart::_EventScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::event_screen.dart::_EventScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::event_screen.dart::_EventScreenState" o-- "organise_me::components::event_manager.dart::EventManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::event_screen.dart::_EventScreenState"
+
+
+
+class "organise_me::screen::home_screen.dart::HomeScreen" {
+
+  {static} +String id
+
+  +State<HomeScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::home_screen.dart::HomeScreen"
+
+
+
+class "organise_me::screen::home_screen.dart::_HomeScreenState" {
+
+  +bool isLoading
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  -ProfilePicture _profilePicture
+
+  +String? username
+
+  -AuthService _authService
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  +DateTime now
+
+  -DateTime _focusedDay
+
+  -DateTime? _selectedDay
+
+  -dynamic _tasks
+
+  +String dropdownValue
+
+  +List<String> options
+
+  +List<Tasks> tasks
+
+  +List<Tasks> allTasks
+
+  +int taskCount
+
+  +bool showNotifiDialog
+
+  +List<Event> events
+
+  +List<Event> allEvents
+
+  +int eventCount
+
+  +List<Transactions> transactions
+
+  +List<Transactions> allTransactions
+
+  -String _userId
+
+  -CollectionReference<Object?> _list
+
+  -CollectionReference<Object?> _event
+
+  -CollectionReference<Object?> _transaction
+
+  +void initState()
+
+  +void dispose()
+
+  -void _onDaySelected()
+
+  +dynamic fetchTasks()
+
+  +dynamic fetchEvents()
+
+  +dynamic fetchTransactions()
+
+  -dynamic _loadUsername()
+
+  -List<Event> _getEventsForDay()
+
+  -List<Tasks> _getTasksForDay()
+
+  -List<Transactions> _getTransactionsForDay()
+
+  -List<dynamic> _getForDay()
+
+  +void didChangeAppLifecycleState()
+
+  -dynamic _resetDialogPreference()
+
+  -dynamic _showTaskDialog()
+
+  +Widget build()
+
+  +int priorityValue()
+
+  +Color getPriorityColor()
+
+  +Color getTransactionColor()
+
+  +Icon getTransactionIcon()
+
+  +Icon getPriorityIcon()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::home_screen.dart::_HomeScreenState" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::home_screen.dart::_HomeScreenState"
+
+
+
+class "organise_me::screen::list_screen.dart::ListScreen" {
+
+  {static} +String id
+
+  +State<ListScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::list_screen.dart::ListScreen"
+
+
+
+class "organise_me::screen::list_screen.dart::_ListScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  -ListManager _listManager
+
+  -dynamic _lists
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -dynamic _fetchLists()
+
+  +Widget build()
+
+  -dynamic _displayTipsDialog()
+
+  -dynamic _displayTextInputDialog()
+
+  -dynamic _showDeleteConfirmationDialog()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::list_screen.dart::_ListScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::list_screen.dart::_ListScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::list_screen.dart::_ListScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::list_screen.dart::_ListScreenState" o-- "organise_me::components::list_manager.dart::ListManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::list_screen.dart::_ListScreenState"
+
+
+
+class "organise_me::screen::login_screen.dart::LoginScreen" {
+
+  {static} +String id
+
+  +State<LoginScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::login_screen.dart::LoginScreen"
+
+
+
+class "organise_me::screen::login_screen.dart::_LoginScreenState" {
+
+  -AuthService _auth
+
+  -GlobalKey<FormState> _formKey
+
+  -TextEditingController _emailController
+
+  -TextEditingController _passwordController
+
+  -bool _isObscured
+
+  -void _togglePasswordVisibility()
+
+  +void dispose()
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::screen::login_screen.dart::_LoginScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::login_screen.dart::_LoginScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+
+"organise_me::screen::login_screen.dart::_LoginScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::login_screen.dart::_LoginScreenState"
+
+
+
+class "organise_me::screen::main.dart::OrganiseME" {
+
+  +dynamic listName
+
+  +dynamic taskName
+
+  +dynamic text
+
+  +dynamic onPress
+
+  +dynamic eventName
+
+  +dynamic name
+
+  +dynamic group
+
+  +dynamic isFromHomeScreen
+
+  +dynamic className
+
+  +Widget build()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "organise_me::screen::main.dart::OrganiseME"
+
+
+
+class "organise_me::screen::manage_category.dart::ManageCategoryScreen" {
+
+  {static} +String id
+
+  +String group
+
+  +State<ManageCategoryScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::manage_category.dart::ManageCategoryScreen"
+
+
+
+class "organise_me::screen::manage_category.dart::_ManageCategoryScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  -MainCategory _mainCategory
+
+  -dynamic _categories
+
+  -dynamic _loadUsername()
+
+  +List<String> determineCategory()
+
+  +void initState()
+
+  -dynamic _fetchCategories()
+
+  -void _showEditCategoryDialog()
+
+  -void _showDeleteCategoryDialog()
+
+  +Widget build()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::manage_category.dart::_ManageCategoryScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::manage_category.dart::_ManageCategoryScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::manage_category.dart::_ManageCategoryScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::manage_category.dart::_ManageCategoryScreenState" o-- "organise_me::components::main_category.dart::MainCategory"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::manage_category.dart::_ManageCategoryScreenState"
+
+
+
+class "organise_me::screen::register_screen.dart::RegisterScreen" {
+
+  {static} +String id
+
+  +State<RegisterScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::register_screen.dart::RegisterScreen"
+
+
+
+class "organise_me::screen::register_screen.dart::_RegisterScreenState" {
+
+  -AuthService _authService
+
+  -TextEditingController _usernameController
+
+  -TextEditingController _emailController
+
+  -TextEditingController _passwordController
+
+  -TextEditingController _confirmPasswordController
+
+  -GlobalKey<FormState> _formKey
+
+  -bool _isObscured
+
+  -bool _isobscured
+
+  -dynamic _register()
+
+  -void _togglePasswordVisibility()
+
+  -void _toggleConfirmPasswordVisibility()
+
+  +void dispose()
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::screen::register_screen.dart::_RegisterScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::register_screen.dart::_RegisterScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::register_screen.dart::_RegisterScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::register_screen.dart::_RegisterScreenState"
+
+
+
+class "organise_me::screen::statistics_screen.dart::StatisticsScreen" {
+
+  {static} +String id
+
+  +State<StatisticsScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::statistics_screen.dart::StatisticsScreen"
+
+
+
+class "organise_me::screen::statistics_screen.dart::_StatisticsScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  -DateTime _focusedDay
+
+  -DateTime? _selectedDay
+
+  -TextEditingController _yearController
+
+  -TextEditingController _dateController
+
+  -TextEditingController _endDateController
+
+  -TextEditingController _startTimeController
+
+  -TextEditingController _endTimeController
+
+  +double? totalExpenses
+
+  +double? totalIncome
+
+  +double? totalDebt
+
+  +double? totalSavings
+
+  +double? totalInvestment
+
+  -DateTime? _selected
+
+  +Map<String, double> groupDataMap
+
+  +Map<String, double> expensesDataMap
+
+  +Map<String, double> incomeDataMap
+
+  +Map<String, double> debtDataMap
+
+  +Map<String, double> savingsDataMap
+
+  +Map<String, double> investmentDataMap
+
+  +List<Color> groupColorList
+
+  +List<Color> expensesColorList
+
+  +List<Color> incomeColorList
+
+  +List<Color> debtColorList
+
+  +List<Color> savingsColorList
+
+  +List<Color> investmentColorList
+
+  -StatisticsManager _statisticsManager
+
+  -dynamic _statistics
+
+  +String? selectedMainCategory
+
+  +String? selectedSubcategories
+
+  +List<String> group
+
+  +String? selectedGroup
+
+  +String? selectedGroupForMonth
+
+  -DateTime? _selectedYear
+
+  +List<BarChartGroupData> barChartData
+
+  +List<double> dailyTotals
+
+  -dynamic _loadUsername()
+
+  +List<Color> generateColorList()
+
+  +void initState()
+
+  +void updateGroupPieChart()
+
+  +void updateExpensesPieChart()
+
+  +void updateIncomePieChart()
+
+  +void updateDebtPieChart()
+
+  +void updateSavingsPieChart()
+
+  +void updateInvestmentPieChart()
+
+  +Map<String, double> updateSelectedPieChart()
+
+  -String _formatTimeOfDay()
+
+  +void dispose()
+
+  +Color getRandomColor()
+
+  +bool isSuitableForBlackText()
+
+  +bool isSimilarToExistingColors()
+
+  +double colorDifference()
+
+  +void updateBarChart()
+
+  -void _onYearGroupChanged()
+
+  +void updateLineChart()
+
+  +Widget build()
+
+  -dynamic _onPressed()
+
+  -dynamic _onPressedYearPicker()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::statistics_screen.dart::_StatisticsScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::statistics_screen.dart::_StatisticsScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::statistics_screen.dart::_StatisticsScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::statistics_screen.dart::_StatisticsScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::statistics_screen.dart::_StatisticsScreenState" o-- "organise_me::components::statistics_manager.dart::StatisticsManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::statistics_screen.dart::_StatisticsScreenState"
+
+
+
+class "organise_me::screen::success_screen.dart::SuccessScreen" {
+
+  {static} +String id
+
+  +String text
+
+  +void Function() onPress
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::screen::success_screen.dart::SuccessScreen" o-- "null::void Function()"
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "organise_me::screen::success_screen.dart::SuccessScreen"
+
+
+
+class "organise_me::screen::task_history.dart::TaskHistoryScreen" {
+
+  {static} +String id
+
+  +String listName
+
+  +State<TaskHistoryScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::task_history.dart::TaskHistoryScreen"
+
+
+
+class "organise_me::screen::task_history.dart::_TaskHistoryScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  +String selectedValue
+
+  -TaskManager _taskManager
+
+  -dynamic _tasks
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  -List<TaskName> _task
+
+  -String _userId
+
+  -CollectionReference<Object?> _list
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -dynamic _fetchTasks()
+
+  +dynamic fetchTasks()
+
+  +Widget build()
+
+  -dynamic _displayListNameDialog()
+
+  -dynamic _displayConfirmationDialog()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::screen::task_history.dart::_TaskHistoryScreenState" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::task_history.dart::_TaskHistoryScreenState"
+
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "organise_me::screen::task_history.dart::_TaskHistoryScreenState"
+
+
+
+class "organise_me::screen::task_screen.dart::TaskScreen" {
+
+  {static} +String id
+
+  +String listName
+
+  +State<TaskScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::task_screen.dart::TaskScreen"
+
+
+
+class "organise_me::screen::task_screen.dart::_TaskScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  +String selectedValue
+
+  -TaskManager _taskManager
+
+  -dynamic _tasks
+
+  -FirebaseFirestore _firestore
+
+  -FirebaseAuth _auth
+
+  -List<TaskName> _task
+
+  -String _userId
+
+  -CollectionReference<Object?> _list
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -dynamic _fetchTasks()
+
+  +dynamic fetchTasks()
+
+  +Widget build()
+
+  -dynamic _displayListNameDialog()
+
+  -dynamic _displayTextInputDialog()
+
+  -dynamic _displayTipsDialog()
+
+  -dynamic _showDeleteConfirmationDialog()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+
+"organise_me::screen::task_screen.dart::_TaskScreenState" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::task_screen.dart::_TaskScreenState"
+
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "organise_me::screen::task_screen.dart::_TaskScreenState"
+
+
+
+class "organise_me::screen::transaction_screen.dart::TransactionScreen" {
+
+  {static} +String id
+
+  +State<TransactionScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::transaction_screen.dart::TransactionScreen"
+
+
+
+class "organise_me::screen::transaction_screen.dart::_TransactionScreenState" {
+
+  +String? username
+
+  -AuthService _authService
+
+  -ProfilePicture _profilePicture
+
+  +bool isLoading
+
+  +int currentPageIndex
+
+  +NavigationDestinationLabelBehavior labelBehavior
+
+  +List<Widget> destinations
+
+  -DateTime _focusedDay
+
+  -DateTime? _selectedDay
+
+  -TextEditingController _nameController
+
+  -TextEditingController _amountController
+
+  -TextEditingController _dateController
+
+  -TextEditingController _toController
+
+  -TextEditingController _descriptionController
+
+  -TransactionManager _transactionManager
+
+  -MainCategory _mainCategory
+
+  +String? selectedCategory
+
+  +String? selectedSubcategory
+
+  -dynamic _categories
+
+  +List<String> group
+
+  +String? selectedGroup
+
+  +List<String> selectedList
+
+  +bool addCatLoading
+
+  -dynamic _loadUsername()
+
+  +void initState()
+
+  -dynamic _fetchCategories()
+
+  +void dispose()
+
+  +List<String> determineCategory()
+
+  -void _showAddMainCategoryDialog()
+
+  +Widget build()
+
+  -dynamic _selectDate()
+
+  -dynamic _displayNameEditDialog()
+
+}
+
+
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "organise_me::components::auth_service.dart::AuthService"
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "organise_me::components::profile_picture.dart::ProfilePicture"
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "flutter::src::material::navigation_bar.dart::NavigationDestinationLabelBehavior"
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "organise_me::components::transaction_manager.dart::TransactionManager"
+
+"organise_me::screen::transaction_screen.dart::_TransactionScreenState" o-- "organise_me::components::main_category.dart::MainCategory"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::transaction_screen.dart::_TransactionScreenState"
+
+
+
+class "organise_me::screen::view_event_details.dart::ViewEventDetailsScreen" {
+
+  {static} +String id
+
+  +String eventName
+
+  +State<ViewEventDetailsScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::view_event_details.dart::ViewEventDetailsScreen"
+
+
+
+class "organise_me::screen::view_event_details.dart::_ViewEventDetailsScreenState" {
+
+  -EventManager _eventManager
+
+  -dynamic _eventDetails
+
+  +void initState()
+
+  -dynamic _fetchEventDetails()
+
+  +Widget build()
+
+  -dynamic _showDeleteConfirmationDialog()
+
+}
+
+
+
+"organise_me::screen::view_event_details.dart::_ViewEventDetailsScreenState" o-- "organise_me::components::event_manager.dart::EventManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::view_event_details.dart::_ViewEventDetailsScreenState"
+
+
+
+class "organise_me::screen::view_task_details.dart::ViewTaskDetailsScreen" {
+
+  {static} +String id
+
+  +String listName
+
+  +String taskName
+
+  +bool isFromHomeScreen
+
+  +State<ViewTaskDetailsScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::view_task_details.dart::ViewTaskDetailsScreen"
+
+
+
+class "organise_me::screen::view_task_details.dart::_ViewTaskDetailsScreenState" {
+
+  -TaskManager _taskManager
+
+  -dynamic _taskDetails
+
+  +List<Tasks> tasks
+
+  +void initState()
+
+  -dynamic _fetchTaskDetails()
+
+  -dynamic _fetchTasks()
+
+  +Widget build()
+
+  -dynamic _showDeleteConfirmationDialog()
+
+}
+
+
+
+"organise_me::screen::view_task_details.dart::_ViewTaskDetailsScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::view_task_details.dart::_ViewTaskDetailsScreenState"
+
+
+
+class "organise_me::screen::view_task_history_details.dart::ViewTaskHistoryDetailsScreen" {
+
+  {static} +String id
+
+  +String listName
+
+  +String taskName
+
+  +bool isFromHomeScreen
+
+  +State<ViewTaskHistoryDetailsScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::view_task_history_details.dart::ViewTaskHistoryDetailsScreen"
+
+
+
+class "organise_me::screen::view_task_history_details.dart::_ViewTaskHistoryDetailsScreenState" {
+
+  -TaskManager _taskManager
+
+  -dynamic _taskDetails
+
+  +List<Tasks> tasks
+
+  +void initState()
+
+  -dynamic _fetchTaskDetails()
+
+  -dynamic _fetchTasks()
+
+  +Widget build()
+
+}
+
+
+
+"organise_me::screen::view_task_history_details.dart::_ViewTaskHistoryDetailsScreenState" o-- "organise_me::components::task_manager.dart::TaskManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::view_task_history_details.dart::_ViewTaskHistoryDetailsScreenState"
+
+
+
+class "organise_me::screen::view_transaction_details.dart::ViewTransactionDetailsScreen" {
+
+  {static} +String id
+
+  +String name
+
+  +State<ViewTransactionDetailsScreen> createState()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "organise_me::screen::view_transaction_details.dart::ViewTransactionDetailsScreen"
+
+
+
+class "organise_me::screen::view_transaction_details.dart::_ViewTransactionDetailsScreenState" {
+
+  -TransactionManager _transactionManager
+
+  -dynamic _transactionDetails
+
+  +void initState()
+
+  -dynamic _fetchTransactionDetails()
+
+  +Widget build()
+
+  -dynamic _showDeleteConfirmationDialog()
+
+}
+
+
+
+"organise_me::screen::view_transaction_details.dart::_ViewTransactionDetailsScreenState" o-- "organise_me::components::transaction_manager.dart::TransactionManager"
+
+"flutter::src::widgets::framework.dart::State" <|-- "organise_me::screen::view_transaction_details.dart::_ViewTransactionDetailsScreenState"
+
+
+
+class "organise_me::screen::welcome_screen.dart::WelcomeScreen" {
+
+  {static} +String id
+
+  +Widget build()
+
+}
+
+
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "organise_me::screen::welcome_screen.dart::WelcomeScreen"
+
+
+
+
+
+@enduml

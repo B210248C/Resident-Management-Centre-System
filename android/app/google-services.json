@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "552002057834",
+    "firebase_url": "https://residentmanagement-af8db-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "residentmanagement-af8db",
+    "storage_bucket": "residentmanagement-af8db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552002057834:android:16ab70b0ad600c28ea7c13",
+        "android_client_info": {
+          "package_name": "com.example.test1001"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB7bVzpL1_gbuwLRjSk5b5zo2Z-vvS_6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

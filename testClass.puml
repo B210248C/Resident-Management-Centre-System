@@ -1,0 +1,1294 @@
+@startuml
+set namespaceSeparator ::
+
+class "test1001::adminHome.dart::AdminHome" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::adminHome.dart::AdminHome"
+
+class "test1001::adminHome.dart::adminHome" {
+  +State<adminHome> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::adminHome.dart::adminHome"
+
+class "test1001::adminHome.dart::_adminHomeState" {
+  -int _page
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::adminHome.dart::_adminHomeState"
+
+class "test1001::announcementResident.dart::NotificationApp" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::announcementResident.dart::NotificationApp"
+
+class "test1001::announcementResident.dart::NotificationScreen" {
+  +_NotificationScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::announcementResident.dart::NotificationScreen"
+
+class "test1001::announcementResident.dart::_NotificationScreenState" {
+  +List<NotificationItem> notifications
+  +MessageType selectedMessageType
+  -int _page
+  -FirebaseAuth _auth
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  -dynamic _fetchNotifications()
+  -void _updateIsReadStatus()
+  +Widget build()
+  -String _getMessageTypeText()
+}
+
+"test1001::announcementResident.dart::_NotificationScreenState" o-- "test1001::announcementResident.dart::MessageType"
+"test1001::announcementResident.dart::_NotificationScreenState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"test1001::announcementResident.dart::_NotificationScreenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::announcementResident.dart::_NotificationScreenState"
+
+class "test1001::announcementResident.dart::NotificationItem" {
+  +String id
+  +String sender
+  +String subject
+  +String message
+  +DateTime timestamp
+  +bool isRead
+  +MessageType type
+}
+
+"test1001::announcementResident.dart::NotificationItem" o-- "test1001::announcementResident.dart::MessageType"
+
+class "test1001::announcementResident.dart::NotificationCard" {
+  +NotificationItem notification
+  +void Function() onTap
+  +void Function() onMarkAsRead
+  +void Function() onDelete
+  +Widget build()
+}
+
+"test1001::announcementResident.dart::NotificationCard" o-- "test1001::announcementResident.dart::NotificationItem"
+"test1001::announcementResident.dart::NotificationCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::announcementResident.dart::NotificationCard"
+
+class "test1001::announcementResident.dart::NotificationDetailsScreen" {
+  +NotificationItem notification
+  +_NotificationDetailsScreenState createState()
+}
+
+"test1001::announcementResident.dart::NotificationDetailsScreen" o-- "test1001::announcementResident.dart::NotificationItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::announcementResident.dart::NotificationDetailsScreen"
+
+class "test1001::announcementResident.dart::_NotificationDetailsScreenState" {
+  -int _page
+  +Widget build()
+  -Widget _buildDetailContainer()
+  -String _formatTimestamp()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::announcementResident.dart::_NotificationDetailsScreenState"
+
+class "test1001::announcementResident.dart::MessageType" {
+  +int index
+  {static} +List<MessageType> values
+  {static} +MessageType all
+  {static} +MessageType announcement
+  {static} +MessageType parcel
+}
+
+"test1001::announcementResident.dart::MessageType" o-- "test1001::announcementResident.dart::MessageType"
+"dart::core::Enum" <|-- "test1001::announcementResident.dart::MessageType"
+
+class "test1001::approvalAccount.dart::AccountApproval" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::approvalAccount.dart::AccountApproval"
+
+class "test1001::approvalAccount.dart::AccountApprovalScreen" {
+  +_AccountApprovalScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::approvalAccount.dart::AccountApprovalScreen"
+
+class "test1001::approvalAccount.dart::_AccountApprovalScreenState" {
+  +List<AccountItem> account
+  +MessageType selectedMessageType
+  -int _page
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  +dynamic fetchAccounts()
+  +void removeAccount()
+  +Widget build()
+  -String _getMessageTypeText()
+}
+
+"test1001::approvalAccount.dart::_AccountApprovalScreenState" o-- "test1001::approvalAccount.dart::MessageType"
+"test1001::approvalAccount.dart::_AccountApprovalScreenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::approvalAccount.dart::_AccountApprovalScreenState"
+
+class "test1001::approvalAccount.dart::AccountItem" {
+  +String id
+  +String name
+  +String email
+  +String phonenumber
+  +String occupancy
+  +String gender
+  +String address
+  +DateTime timestamp
+  +bool isRead
+  +bool accountState
+}
+
+class "test1001::approvalAccount.dart::AccountCard" {
+  +AccountItem account
+  +void Function() onTap
+  +Widget build()
+}
+
+"test1001::approvalAccount.dart::AccountCard" o-- "test1001::approvalAccount.dart::AccountItem"
+"test1001::approvalAccount.dart::AccountCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::approvalAccount.dart::AccountCard"
+
+class "test1001::approvalAccount.dart::AccountDetailsScreenDetail" {
+  +AccountItem account
+  +dynamic Function(AccountItem) onDecline
+  +dynamic Function(AccountItem) removeAccount
+  +_AccountDetailsScreenDetailState createState()
+}
+
+"test1001::approvalAccount.dart::AccountDetailsScreenDetail" o-- "test1001::approvalAccount.dart::AccountItem"
+"test1001::approvalAccount.dart::AccountDetailsScreenDetail" o-- "null::dynamic Function(AccountItem)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::approvalAccount.dart::AccountDetailsScreenDetail"
+
+class "test1001::approvalAccount.dart::_AccountDetailsScreenDetailState" {
+  -int _page
+  +bool showMessageOptions
+  +void deleteAccount()
+  -void _showConfirmationDialog()
+  +void approveAccount()
+  +Widget build()
+  -Widget _buildDetailContainer()
+  -String _formatTimestamp()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::approvalAccount.dart::_AccountDetailsScreenDetailState"
+
+class "test1001::approvalAccount.dart::MessageType" {
+  +int index
+  {static} +List<MessageType> values
+  {static} +MessageType all
+  {static} +MessageType newest
+  {static} +MessageType oldest
+}
+
+"test1001::approvalAccount.dart::MessageType" o-- "test1001::approvalAccount.dart::MessageType"
+"dart::core::Enum" <|-- "test1001::approvalAccount.dart::MessageType"
+
+class "test1001::appscreen_constant.dart::AppConstant" {
+  {static} +double baseWidth
+  {static} +double baseHeight
+  {static} +double screenWidth()
+  {static} +double screenHeight()
+  {static} +double widthScale()
+  {static} +double heightScale()
+}
+
+class "test1001::contractorRegister.dart::ContractorRegister" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::contractorRegister.dart::ContractorRegister"
+
+class "test1001::contractorRegister.dart::contractorRegister" {
+  +State<contractorRegister> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::contractorRegister.dart::contractorRegister"
+
+class "test1001::contractorRegister.dart::_contractorRegisterState" {
+  -GlobalKey<FormState> _formKey
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _timePicker
+  -TextEditingController _datePicker
+  -TextEditingController _companyController
+  -TextEditingController _namecontroller
+  -String? _selectedPurpose
+  -TextEditingController _carPlateController
+  -GlobalKey<State<StatefulWidget>> _qrKey
+  -dynamic _saveContractorData()
+  -dynamic _shareQRCodeImage()
+  -void _showQRCodeDialog()
+  +void showLoadingDialog()
+  +Widget build()
+}
+
+"test1001::contractorRegister.dart::_contractorRegisterState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::contractorRegister.dart::_contractorRegisterState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::contractorRegister.dart::_contractorRegisterState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::contractorRegister.dart::_contractorRegisterState"
+
+class "test1001::feedbackDetails.dart::FeedbackDetails" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::feedbackDetails.dart::FeedbackDetails"
+
+class "test1001::feedbackDetails.dart::FeedbackDetailsScreen" {
+  +_FeedbackDetailsScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::feedbackDetails.dart::FeedbackDetailsScreen"
+
+class "test1001::feedbackDetails.dart::_FeedbackDetailsScreenState" {
+  +List<FeedbackItem> feedback
+  +MessageType selectedMessageType
+  -int _page
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  -void _fetchFeedback()
+  -void _updateIsReadStatus()
+  +Widget build()
+  -String _getMessageTypeText()
+}
+
+"test1001::feedbackDetails.dart::_FeedbackDetailsScreenState" o-- "test1001::feedbackDetails.dart::MessageType"
+"test1001::feedbackDetails.dart::_FeedbackDetailsScreenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::feedbackDetails.dart::_FeedbackDetailsScreenState"
+
+class "test1001::feedbackDetails.dart::FeedbackItem" {
+  +String id
+  +String name
+  +String email
+  +String subject
+  +String message
+  +DateTime timestamp
+  +bool isRead
+}
+
+class "test1001::feedbackDetails.dart::FeedbackCard" {
+  +FeedbackItem feedback
+  +void Function() onTap
+  +Widget build()
+}
+
+"test1001::feedbackDetails.dart::FeedbackCard" o-- "test1001::feedbackDetails.dart::FeedbackItem"
+"test1001::feedbackDetails.dart::FeedbackCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::feedbackDetails.dart::FeedbackCard"
+
+class "test1001::feedbackDetails.dart::FeedbackDetailsScreenDetail" {
+  +FeedbackItem feedback
+  +_FeedbackDetailsScreenDetailState createState()
+}
+
+"test1001::feedbackDetails.dart::FeedbackDetailsScreenDetail" o-- "test1001::feedbackDetails.dart::FeedbackItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::feedbackDetails.dart::FeedbackDetailsScreenDetail"
+
+class "test1001::feedbackDetails.dart::_FeedbackDetailsScreenDetailState" {
+  -int _page
+  +Widget build()
+  -Widget _buildDetailContainer()
+  -String _formatTimestamp()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::feedbackDetails.dart::_FeedbackDetailsScreenDetailState"
+
+class "test1001::feedbackDetails.dart::MessageType" {
+  +int index
+  {static} +List<MessageType> values
+  {static} +MessageType all
+  {static} +MessageType newest
+  {static} +MessageType oldest
+}
+
+"test1001::feedbackDetails.dart::MessageType" o-- "test1001::feedbackDetails.dart::MessageType"
+"dart::core::Enum" <|-- "test1001::feedbackDetails.dart::MessageType"
+
+class "test1001::feedbackResident.dart::FeedbackResident" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::feedbackResident.dart::FeedbackResident"
+
+class "test1001::feedbackResident.dart::feedbackResident" {
+  +State<feedbackResident> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::feedbackResident.dart::feedbackResident"
+
+class "test1001::feedbackResident.dart::_feedbackResidentState" {
+  -int _page
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _controller
+  -TextEditingController _controllerA
+  -TextEditingController _controllerB
+  -TextEditingController _controllerC
+  -ScrollController _scrollController
+  -GlobalKey<FormState> _formKey
+  +int maxWords
+  +void initState()
+  -dynamic _submitFeedback()
+  +Widget build()
+}
+
+"test1001::feedbackResident.dart::_feedbackResidentState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::feedbackResident.dart::_feedbackResidentState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"test1001::feedbackResident.dart::_feedbackResidentState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::feedbackResident.dart::_feedbackResidentState"
+
+class "test1001::feedbackResident.dart::WordLimitFormatter" {
+  +int maxWords
+  +TextEditingValue formatEditUpdate()
+}
+
+"flutter::src::services::text_formatter.dart::TextInputFormatter" <|-- "test1001::feedbackResident.dart::WordLimitFormatter"
+
+class "test1001::forgetpassword.dart::Forgetpassword" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::forgetpassword.dart::Forgetpassword"
+
+class "test1001::forgetpassword.dart::forgetPassword" {
+  +State<forgetPassword> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::forgetpassword.dart::forgetPassword"
+
+class "test1001::forgetpassword.dart::_forgetPasswordState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::forgetpassword.dart::_forgetPasswordState"
+
+class "test1001::historyQRcode.dart::HistoryPage" {
+  {static} +String id
+  +_HistoryPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::historyQRcode.dart::HistoryPage"
+
+class "test1001::historyQRcode.dart::_HistoryPageState" {
+  -FirebaseAuth _auth
+  -FirebaseFirestore _firestore
+  -dynamic _getVisitorData()
+  -void _shareQRCode()
+  +Widget build()
+}
+
+"test1001::historyQRcode.dart::_HistoryPageState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"test1001::historyQRcode.dart::_HistoryPageState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::historyQRcode.dart::_HistoryPageState"
+
+class "test1001::loginPage.dart::loginPage" {
+  {static} +String id
+  +String role
+  +_LoginPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::loginPage.dart::loginPage"
+
+class "test1001::loginPage.dart::_LoginPageState" {
+  -GlobalKey<FormState> _formKey
+  +TextEditingController emailController
+  +TextEditingController passwordController
+  -bool _isObscured
+  -void _toggleVisibility()
+  -dynamic _login()
+  +Widget build()
+}
+
+"test1001::loginPage.dart::_LoginPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::loginPage.dart::_LoginPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::loginPage.dart::_LoginPageState"
+
+class "test1001::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::main.dart::MyApp"
+
+class "test1001::makeAnnouncement.dart::MakeAnnouncement" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::makeAnnouncement.dart::MakeAnnouncement"
+
+class "test1001::makeAnnouncement.dart::makeAnnouncement" {
+  +State<makeAnnouncement> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::makeAnnouncement.dart::makeAnnouncement"
+
+class "test1001::makeAnnouncement.dart::_makeAnnouncementState" {
+  -int _page
+  +TextEditingController subjectController
+  +TextEditingController messageController
+  -GlobalKey<FormState> _formKey
+  +dynamic getAccessToken()
+  +dynamic sendNotificationToAllResidents()
+  -dynamic _saveAnnouncement()
+  -void _clearContent()
+  +void showLoadingDialog()
+  -void _showConfirmationDialog()
+  +Widget build()
+}
+
+"test1001::makeAnnouncement.dart::_makeAnnouncementState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::makeAnnouncement.dart::_makeAnnouncementState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::makeAnnouncement.dart::_makeAnnouncementState"
+
+class "test1001::parcelManagement.dart::ParcelManagement" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::parcelManagement.dart::ParcelManagement"
+
+class "test1001::parcelManagement.dart::ParcelManagementScreeen" {
+  +_ParcelManagementScreeenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::parcelManagement.dart::ParcelManagementScreeen"
+
+class "test1001::parcelManagement.dart::_ParcelManagementScreeenState" {
+  +List<ResidentItem> residentDetails
+  -int _page
+  -TextEditingController _searchController
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  +dynamic fetchResidents()
+  +Widget build()
+}
+
+"test1001::parcelManagement.dart::_ParcelManagementScreeenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::parcelManagement.dart::_ParcelManagementScreeenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::parcelManagement.dart::_ParcelManagementScreeenState"
+
+class "test1001::parcelManagement.dart::ResidentItem" {
+  +String name
+  +String phonenumber
+  +String address
+  +String email
+}
+
+class "test1001::parcelManagement.dart::ResidentCard" {
+  +ResidentItem resident
+  +void Function() onTap
+  +Widget build()
+}
+
+"test1001::parcelManagement.dart::ResidentCard" o-- "test1001::parcelManagement.dart::ResidentItem"
+"test1001::parcelManagement.dart::ResidentCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::parcelManagement.dart::ResidentCard"
+
+class "test1001::parcelManagement.dart::ResidentDetailsScreen" {
+  +ResidentItem resident
+  +_ResidentDetailsScreenState createState()
+}
+
+"test1001::parcelManagement.dart::ResidentDetailsScreen" o-- "test1001::parcelManagement.dart::ResidentItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::parcelManagement.dart::ResidentDetailsScreen"
+
+class "test1001::parcelManagement.dart::_ResidentDetailsScreenState" {
+  -int _page
+  +Widget build()
+  -Widget _buildDetailContainer()
+  -String _formatTimestamp()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::parcelManagement.dart::_ResidentDetailsScreenState"
+
+class "test1001::registerResident.dart::RegisterResident" {
+  {static} +String id
+  +String role
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::registerResident.dart::RegisterResident"
+
+class "test1001::registerResident.dart::registerResident" {
+  +String role
+  +State<registerResident> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::registerResident.dart::registerResident"
+
+class "test1001::registerResident.dart::_registerResidentState" {
+  +Color textColor
+  -Gender _selectedGender
+  -FirebaseAuth _auth
+  -FirebaseFirestore _firestore
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _usernameController
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -TextEditingController _phoneController
+  -TextEditingController _addressController
+  -String? _selectedOccupancy
+  -bool _isObscured
+  -void _toggleVisibility()
+  -dynamic _register()
+  +Widget build()
+}
+
+"test1001::registerResident.dart::_registerResidentState" o-- "dart::ui::Color"
+"test1001::registerResident.dart::_registerResidentState" o-- "test1001::registerResident.dart::Gender"
+"test1001::registerResident.dart::_registerResidentState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"test1001::registerResident.dart::_registerResidentState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"test1001::registerResident.dart::_registerResidentState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::registerResident.dart::_registerResidentState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::registerResident.dart::_registerResidentState"
+
+class "test1001::registerResident.dart::Gender" {
+  +int index
+  {static} +List<Gender> values
+  {static} +Gender male
+  {static} +Gender female
+}
+
+"test1001::registerResident.dart::Gender" o-- "test1001::registerResident.dart::Gender"
+"dart::core::Enum" <|-- "test1001::registerResident.dart::Gender"
+
+class "test1001::registerSecurityAdmin.dart::RegisterSecurityAdmin" {
+  {static} +String id
+  +String role
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::registerSecurityAdmin.dart::RegisterSecurityAdmin"
+
+class "test1001::registerSecurityAdmin.dart::RegisterSecurityAdminScreen" {
+  +String role
+  +State<RegisterSecurityAdminScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::registerSecurityAdmin.dart::RegisterSecurityAdminScreen"
+
+class "test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState" {
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -TextEditingController _confirmPasswordController
+  -bool _isObscured
+  -FirebaseAuth _auth
+  -FirebaseFirestore _firestore
+  -void _toggleVisibility()
+  -dynamic _register()
+  +Widget build()
+}
+
+"test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::registerSecurityAdmin.dart::_RegisterSecurityAdminScreenState"
+
+class "test1001::reportDetails.dart::ReportDetails" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::reportDetails.dart::ReportDetails"
+
+class "test1001::reportDetails.dart::ReportDetailsScreen" {
+  +_ReportDetailsScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::reportDetails.dart::ReportDetailsScreen"
+
+class "test1001::reportDetails.dart::_ReportDetailsScreenState" {
+  +List<ReportItem> report
+  +MessageType selectedMessageType
+  -int _page
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  +void fetchReports()
+  -void _updateIsReadStatus()
+  +Widget build()
+  -String _getMessageTypeText()
+}
+
+"test1001::reportDetails.dart::_ReportDetailsScreenState" o-- "test1001::reportDetails.dart::MessageType"
+"test1001::reportDetails.dart::_ReportDetailsScreenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::reportDetails.dart::_ReportDetailsScreenState"
+
+class "test1001::reportDetails.dart::ReportItem" {
+  +String id
+  +String name
+  +String email
+  +String subject
+  +String message
+  +DateTime timestamp
+  +bool isRead
+  +List<String> media
+}
+
+class "test1001::reportDetails.dart::ReportCard" {
+  +ReportItem report
+  +void Function() onTap
+  +Widget build()
+}
+
+"test1001::reportDetails.dart::ReportCard" o-- "test1001::reportDetails.dart::ReportItem"
+"test1001::reportDetails.dart::ReportCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::reportDetails.dart::ReportCard"
+
+class "test1001::reportDetails.dart::ReportDetailsScreenDetail" {
+  +ReportItem report
+  +_ReportDetailsScreenDetailState createState()
+}
+
+"test1001::reportDetails.dart::ReportDetailsScreenDetail" o-- "test1001::reportDetails.dart::ReportItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::reportDetails.dart::ReportDetailsScreenDetail"
+
+class "test1001::reportDetails.dart::_ReportDetailsScreenDetailState" {
+  -int _page
+  +Widget build()
+  -Widget _buildDetailContainer()
+  -Widget _buildMediaGrid()
+  -String _formatTimestamp()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::reportDetails.dart::_ReportDetailsScreenDetailState"
+
+class "test1001::reportDetails.dart::FullScreenImage" {
+  +String imagePath
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::reportDetails.dart::FullScreenImage"
+
+class "test1001::reportDetails.dart::MessageType" {
+  +int index
+  {static} +List<MessageType> values
+  {static} +MessageType all
+  {static} +MessageType newest
+  {static} +MessageType oldest
+}
+
+"test1001::reportDetails.dart::MessageType" o-- "test1001::reportDetails.dart::MessageType"
+"dart::core::Enum" <|-- "test1001::reportDetails.dart::MessageType"
+
+class "test1001::reportGuard.dart::ReportSecurity" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::reportGuard.dart::ReportSecurity"
+
+class "test1001::reportGuard.dart::reportSecurity" {
+  +State<reportSecurity> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::reportGuard.dart::reportSecurity"
+
+class "test1001::reportGuard.dart::_reportSecurityState" {
+  -int _page
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _controller
+  -TextEditingController _controllerA
+  -TextEditingController _controllerB
+  -TextEditingController _controllerC
+  -ScrollController _scrollController
+  -GlobalKey<FormState> _formKey
+  +int maxWords
+  +Color buttonTextColor
+  +double buttonFontSize
+  +double borderRadius
+  -List<File> _selectedImages
+  +dynamic path
+  +dynamic selectFromGallery()
+  +void initState()
+  +dynamic saveData()
+  +void showLoadingDialog()
+  +Widget build()
+  +Widget buildCustomButton()
+}
+
+"test1001::reportGuard.dart::_reportSecurityState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::reportGuard.dart::_reportSecurityState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"test1001::reportGuard.dart::_reportSecurityState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::reportGuard.dart::_reportSecurityState" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::reportGuard.dart::_reportSecurityState"
+
+class "test1001::reportGuard.dart::WordLimitFormatter" {
+  +int maxWords
+  +TextEditingValue formatEditUpdate()
+}
+
+"flutter::src::services::text_formatter.dart::TextInputFormatter" <|-- "test1001::reportGuard.dart::WordLimitFormatter"
+
+class "test1001::reportResident.dart::ReportResident" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::reportResident.dart::ReportResident"
+
+class "test1001::reportResident.dart::reportResident" {
+  +State<reportResident> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::reportResident.dart::reportResident"
+
+class "test1001::reportResident.dart::_reportResidentState" {
+  -int _page
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _controller
+  -TextEditingController _controllerA
+  -TextEditingController _controllerB
+  -TextEditingController _controllerC
+  -ScrollController _scrollController
+  -GlobalKey<FormState> _formKey
+  +int maxWords
+  +Color buttonTextColor
+  +double buttonFontSize
+  +double borderRadius
+  -List<File> _selectedImages
+  +dynamic selectFromGallery()
+  +void initState()
+  +dynamic saveData()
+  +void showLoadingDialog()
+  +Widget build()
+  +Widget buildCustomButton()
+}
+
+"test1001::reportResident.dart::_reportResidentState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::reportResident.dart::_reportResidentState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"test1001::reportResident.dart::_reportResidentState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::reportResident.dart::_reportResidentState" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::reportResident.dart::_reportResidentState"
+
+class "test1001::reportResident.dart::WordLimitFormatter" {
+  +int maxWords
+  +TextEditingValue formatEditUpdate()
+}
+
+"flutter::src::services::text_formatter.dart::TextInputFormatter" <|-- "test1001::reportResident.dart::WordLimitFormatter"
+
+class "test1001::residentHome.dart::ResidentHome" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::residentHome.dart::ResidentHome"
+
+class "test1001::residentHome.dart::residentHome" {
+  +State<residentHome> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::residentHome.dart::residentHome"
+
+class "test1001::residentHome.dart::_residentHomeState" {
+  -int _page
+  +String userName
+  -FirebaseAuth _auth
+  -ImagePicker _picker
+  -String? _profileImageUrl
+  -bool _isLoading
+  +void initState()
+  +dynamic fetchUserName()
+  -dynamic _loadProfileImage()
+  -dynamic _pickAndUploadImage()
+  +Widget build()
+}
+
+"test1001::residentHome.dart::_residentHomeState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"test1001::residentHome.dart::_residentHomeState" o-- "image_picker::image_picker.dart::ImagePicker"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::residentHome.dart::_residentHomeState"
+
+class "test1001::roleChoose.dart::RoleChoose" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::roleChoose.dart::RoleChoose"
+
+class "test1001::roleChoose.dart::roleChoose" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::roleChoose.dart::roleChoose"
+
+class "test1001::roleChooseRegister.dart::RoleChooseRegister" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::roleChooseRegister.dart::RoleChooseRegister"
+
+class "test1001::roleChooseRegister.dart::roleChooseRegister" {
+  +State<roleChooseRegister> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::roleChooseRegister.dart::roleChooseRegister"
+
+class "test1001::roleChooseRegister.dart::_roleChooseRegisterState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::roleChooseRegister.dart::_roleChooseRegisterState"
+
+class "test1001::scannerSecurity.dart::ScannerSecurity" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::scannerSecurity.dart::ScannerSecurity"
+
+class "test1001::scannerSecurity.dart::scannerSecurity" {
+  +State<scannerSecurity> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::scannerSecurity.dart::scannerSecurity"
+
+class "test1001::scannerSecurity.dart::_scannerSecurityState" {
+  -int _page
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _controller
+  -TextEditingController _controllerA
+  -ScrollController _scrollController
+  +int maxWords
+  +Color buttonTextColor
+  +double buttonFontSize
+  +double borderRadius
+  +GlobalKey<State<StatefulWidget>> qrKey
+  -bool _isScanningPaused
+  +Barcode? result
+  +QRViewController? controllerQR
+  +void initState()
+  -void _onQRViewCreated()
+  -dynamic _fetchVisitorDetails()
+  -void _showVisitorDetailsDialog()
+  -void _resumeScanning()
+  -void _showExpiredDialog()
+  -void _showErrorDialog()
+  +Widget build()
+}
+
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "dart::ui::Color"
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "qr_code_scanner::src::types::barcode.dart::Barcode"
+"test1001::scannerSecurity.dart::_scannerSecurityState" o-- "qr_code_scanner::src::qr_code_scanner.dart::QRViewController"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::scannerSecurity.dart::_scannerSecurityState"
+
+class "test1001::securityHome.dart::SecurityHome" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::securityHome.dart::SecurityHome"
+
+class "test1001::securityHome.dart::securityHome" {
+  +State<securityHome> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::securityHome.dart::securityHome"
+
+class "test1001::securityHome.dart::_securityHomeState" {
+  -int _page
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::securityHome.dart::_securityHomeState"
+
+class "test1001::SOSdetail.dart::SOSdetails" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::SOSdetail.dart::SOSdetails"
+
+class "test1001::SOSdetail.dart::SOSdetailsScreeen" {
+  +_SOSdetailsScreeenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::SOSdetail.dart::SOSdetailsScreeen"
+
+class "test1001::SOSdetail.dart::_SOSdetailsScreeenState" {
+  +List<SOSItem> SOSDetails
+  -int _page
+  -TextEditingController _searchController
+  -DateTime? _selectedDate
+  -bool _isNewestFirst
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  +void initState()
+  +void dispose()
+  +void fetchSOS()
+  +Widget build()
+}
+
+"test1001::SOSdetail.dart::_SOSdetailsScreeenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::SOSdetail.dart::_SOSdetailsScreeenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::SOSdetail.dart::_SOSdetailsScreeenState"
+
+class "test1001::SOSdetail.dart::SOSItem" {
+  +String id
+  +String name
+  +String email
+  +String address
+  +String phone
+  +DateTime timestamp
+  +bool checked
+  +dynamic updateCheckedStatus()
+}
+
+class "test1001::SOSdetail.dart::SOSCard" {
+  +SOSItem SOS
+  +void Function(bool?) onChanged
+  +Widget build()
+  -String _formatTimestamp()
+}
+
+"test1001::SOSdetail.dart::SOSCard" o-- "test1001::SOSdetail.dart::SOSItem"
+"test1001::SOSdetail.dart::SOSCard" o-- "flutter::src::foundation::basic_types.dart::void Function(bool)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::SOSdetail.dart::SOSCard"
+
+class "test1001::SOSpage.dart::SOSpage" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::SOSpage.dart::SOSpage"
+
+class "test1001::SOSpage.dart::soscall" {
+  +State<soscall> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::SOSpage.dart::soscall"
+
+class "test1001::SOSpage.dart::_soscallState" {
+  -int _page
+  +dynamic showSOSDialog()
+  +void showLoadingDialog()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::SOSpage.dart::_soscallState"
+
+class "test1001::startRMS.dart::StartRMS" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::startRMS.dart::StartRMS"
+
+class "test1001::startRMS.dart::startRMS" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::startRMS.dart::startRMS"
+
+class "test1001::star_widget.dart::StarWidget" {
+  +double? left
+  +double? top
+  +double? right
+  +double width
+  +double height
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::star_widget.dart::StarWidget"
+
+class "test1001::SuccessAdminGuard.dart::SuccessAdminGuard" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::SuccessAdminGuard.dart::SuccessAdminGuard"
+
+class "test1001::SuccessAdminGuard.dart::successPageAG" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::SuccessAdminGuard.dart::successPageAG"
+
+class "test1001::successfulregistered.dart::SuccessPage" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::successfulregistered.dart::SuccessPage"
+
+class "test1001::successfulregistered.dart::successPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::successfulregistered.dart::successPage"
+
+class "test1001::utility.dart::UtilityPage" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::UtilityPage"
+
+class "test1001::utility.dart::utilityPage" {
+  +State<utilityPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::utility.dart::utilityPage"
+
+class "test1001::utility.dart::_utilityPageState" {
+  -int _page
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::utility.dart::_utilityPageState"
+
+class "test1001::utility.dart::StatementScreen" {
+  +_StatementScreenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::utility.dart::StatementScreen"
+
+class "test1001::utility.dart::_StatementScreenState" {
+  +bool isPaid
+  +List<Map<String, dynamic>> transactions
+  +void initState()
+  -void _generateTransactions()
+  -void _makePayment()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::utility.dart::_StatementScreenState"
+
+class "test1001::utility.dart::TotalDueSection" {
+  +bool isPaid
+  +void Function() onPayPressed
+  +List<Map<String, dynamic>> transactions
+  +Widget build()
+}
+
+"test1001::utility.dart::TotalDueSection" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::TotalDueSection"
+
+class "test1001::utility.dart::TransactionsList" {
+  +bool showAll
+  +List<Map<String, dynamic>> transactions
+  +List<Map<String, dynamic>> displayedTransactions
+  -Map<String, List<Map<String, dynamic>>> _groupTransactionsByMonth()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::TransactionsList"
+
+class "test1001::utility.dart::TransactionItem" {
+  +Map<String, dynamic> transaction
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::TransactionItem"
+
+class "test1001::utility.dart::ViewAllTransactionsButton" {
+  +List<Map<String, dynamic>> transactions
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::ViewAllTransactionsButton"
+
+class "test1001::utility.dart::AllTransactionsScreen" {
+  +List<Map<String, dynamic>> transactions
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::AllTransactionsScreen"
+
+class "test1001::utility.dart::PaymentDialog" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::PaymentDialog"
+
+class "test1001::utility.dart::FPXPaymentDialog" {
+  +_FPXPaymentDialogState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::utility.dart::FPXPaymentDialog"
+
+class "test1001::utility.dart::_FPXPaymentDialogState" {
+  +String? selectedBank
+  +bool agreeToTerms
+  +List<String> banks
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::utility.dart::_FPXPaymentDialogState"
+
+class "test1001::utility.dart::CreditCardFormDialog" {
+  +_CreditCardFormDialogState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::utility.dart::CreditCardFormDialog"
+
+class "test1001::utility.dart::_CreditCardFormDialogState" {
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _cardNumberController
+  -TextEditingController _expiryDateController
+  -TextEditingController _cvvController
+  -TextEditingController _cardHolderNameController
+  +Widget build()
+  +void dispose()
+}
+
+"test1001::utility.dart::_CreditCardFormDialogState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::utility.dart::_CreditCardFormDialogState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::utility.dart::_CreditCardFormDialogState"
+
+class "test1001::utility.dart::TransactionDetailScreen" {
+  +Map<String, dynamic> transaction
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::utility.dart::TransactionDetailScreen"
+
+class "test1001::visitorDetails.dart::Visitordetails" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::visitorDetails.dart::Visitordetails"
+
+class "test1001::visitorDetails.dart::VisitordetailsScreeen" {
+  +_VisitordetailsScreeenState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::visitorDetails.dart::VisitordetailsScreeen"
+
+class "test1001::visitorDetails.dart::_VisitordetailsScreeenState" {
+  +List<VisitorItem> visitorDetails
+  -int _page
+  -TextEditingController _searchController
+  -Timer? _timer
+  -bool _isLoading
+  -bool _isFetching
+  -String _filter
+  +void initState()
+  +void dispose()
+  +void fetchVisitors()
+  +Widget build()
+}
+
+"test1001::visitorDetails.dart::_VisitordetailsScreeenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::visitorDetails.dart::_VisitordetailsScreeenState" o-- "dart::async::Timer"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::visitorDetails.dart::_VisitordetailsScreeenState"
+
+class "test1001::visitorDetails.dart::VisitorItem" {
+  +String id
+  +String name
+  +String phonenumber
+  +String identitycard
+  +String carplate
+  +String date
+  +String time
+  +String enddate
+  +String endtime
+  +String type
+  +String purpose
+  +String unit
+}
+
+class "test1001::visitorDetails.dart::VisitorCard" {
+  +VisitorItem visitor
+  +void Function() onTap
+  +Widget build()
+}
+
+"test1001::visitorDetails.dart::VisitorCard" o-- "test1001::visitorDetails.dart::VisitorItem"
+"test1001::visitorDetails.dart::VisitorCard" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::visitorDetails.dart::VisitorCard"
+
+class "test1001::visitorDetails.dart::VisitorDetailsScreen" {
+  +VisitorItem visitor
+  +_VisitorDetailsScreenState createState()
+}
+
+"test1001::visitorDetails.dart::VisitorDetailsScreen" o-- "test1001::visitorDetails.dart::VisitorItem"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::visitorDetails.dart::VisitorDetailsScreen"
+
+class "test1001::visitorDetails.dart::_VisitorDetailsScreenState" {
+  -int _page
+  +Widget build()
+  -Widget _buildDetailContainer()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::visitorDetails.dart::_VisitorDetailsScreenState"
+
+class "test1001::visitorRegister.dart::VisitorRegister" {
+  {static} +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "test1001::visitorRegister.dart::VisitorRegister"
+
+class "test1001::visitorRegister.dart::visitorRegister" {
+  +State<visitorRegister> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "test1001::visitorRegister.dart::visitorRegister"
+
+class "test1001::visitorRegister.dart::_visitorRegisterState" {
+  -GlobalKey<FormState> _formKey
+  +TextEditingController timePicker
+  +TextEditingController datePicker
+  -TextEditingController _timePicker
+  -TextEditingController _datePicker
+  -TextEditingController _phoneController
+  -TextEditingController _namecontroller
+  -TextEditingController _identityCardController
+  -TextEditingController _carPlateController
+  -TextEditingController _unitNumberController
+  -PageController _pageController
+  -int _page
+  -GlobalKey<State<StatefulWidget>> _qrKey
+  -dynamic _saveVisitorData()
+  -dynamic _shareQRCodeImage()
+  -void _showQRCodeDialog()
+  +void showLoadingDialog()
+  +Widget build()
+}
+
+"test1001::visitorRegister.dart::_visitorRegisterState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"test1001::visitorRegister.dart::_visitorRegisterState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"test1001::visitorRegister.dart::_visitorRegisterState" o-- "flutter::src::widgets::page_view.dart::PageController"
+"test1001::visitorRegister.dart::_visitorRegisterState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"flutter::src::widgets::framework.dart::State" <|-- "test1001::visitorRegister.dart::_visitorRegisterState"
+
+
+@enduml
